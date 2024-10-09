@@ -1,94 +1,91 @@
 #include <GL/glut.h>
 
-float angleX = 0.0f; // Sudut rotasi di sumbu X
-float angleY = 0.0f; // Sudut rotasi di sumbu Y
+float angleX = 0.0f; 
+float angleY = 0.0f;
 
 void init() {
-    glClearColor(0.0, 0.0, 0.0, 1.0); // Background hitam
-    glEnable(GL_DEPTH_TEST); // Aktifkan depth test untuk 3D
+    glClearColor(0.0, 0.0, 0.0, 1.0); 
+    glEnable(GL_DEPTH_TEST); 
 }
 
 void display() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
 
-    // Mengatur posisi kamera untuk perspektif 3D
-    gluLookAt(2.0, 3.0, 6.0,  // Posisi kamera di koordinat (x, y, z)
-        0.0, 0.0, 0.0,  // Titik yang dilihat kamera (pusat lemari)
-        0.0, 1.0, 0.0); // Arah vertikal (up vector)
+    gluLookAt(2.0, 3.0, 6.0,  
+        0.0, 0.0, 0.0,  
+        0.0, 1.0, 0.0); 
 
-    // Terapkan rotasi berdasarkan input keyboard
-    glRotatef(angleX, 1.0f, 0.0f, 0.0f); // Rotasi di sumbu X
-    glRotatef(angleY, 0.0f, 1.0f, 0.0f); // Rotasi di sumbu Y
+    glRotatef(angleX, 1.0f, 0.0f, 0.0f); 
+    glRotatef(angleY, 0.0f, 1.0f, 0.0f); 
 
-    // 1. Warna badan lemari (abu-abu)
-    glColor3f(0.7f, 0.7f, 0.7f); // Warna abu-abu
+    
+    glColor3f(0.7f, 0.7f, 0.7f); 
 
     // Bingkai luar lemari
     glPushMatrix();
-    glScalef(1.0f, 2.0f, 0.5f); // Skala sesuai proporsi gambar
-    glutSolidCube(2.0); // Bingkai dasar lemari
+    glScalef(1.0f, 2.0f, 0.5f); 
+    glutSolidCube(2.0); 
     glPopMatrix();
 
-    // 2. Warna jendela/pintu kaca (putih)
-    glColor3f(1.0f, 1.0f, 1.0f); // Warna putih untuk kaca
 
-    // Membuat enam kaca, dua di atas, dua di tengah, dua di bawah
+    glColor3f(1.0f, 1.0f, 1.0f); 
+
     // Kaca atas
     for (float j = -0.5f; j <= 0.5f; j += 1.0f) {
         glPushMatrix();
-        glTranslatef(j, 0.7f, 0.501f); // Posisi kaca atas
-        glScalef(0.9f, 0.6f, 0.02f); // Skala kaca
-        glutSolidCube(1.0); // Kaca
+        glTranslatef(j, 0.7f, 0.501f); 
+        glScalef(0.9f, 0.6f, 0.02f); 
+        glutSolidCube(1.0); 
         glPopMatrix();
     }
 
     // Kaca tengah
     for (float j = -0.5f; j <= 0.5f; j += 1.0f) {
         glPushMatrix();
-        glTranslatef(j, 0.0f, 0.501f); // Posisi kaca tengah
-        glScalef(0.9f, 0.6f, 0.02f); // Skala kaca
-        glutSolidCube(1.0); // Kaca
+        glTranslatef(j, 0.0f, 0.501f); 
+        glScalef(0.9f, 0.6f, 0.02f); 
+        glutSolidCube(1.0); 
         glPopMatrix();
     }
 
     // Kaca bawah
     for (float j = -0.5f; j <= 0.5f; j += 1.0f) {
         glPushMatrix();
-        glTranslatef(j, -0.7f, 0.501f); // Posisi kaca bawah
-        glScalef(0.9f, 0.6f, 0.02f); // Skala kaca
-        glutSolidCube(1.0); // Kaca
+        glTranslatef(j, -0.7f, 0.501f); 
+        glScalef(0.9f, 0.6f, 0.02f); 
+        glutSolidCube(1.0); 
         glPopMatrix();
     }
 
-    // 3. Warna pegangan pintu (hitam)
-    glColor3f(0.0f, 0.0f, 0.0f); // Warna hitam
+    
+    glColor3f(0.0f, 0.0f, 0.0f); 
 
     // Pegangan pintu pertama
     glPushMatrix();
-    glTranslatef(-0.35f, 0.0f, 0.52f); // Posisi pegangan pintu pertama
-    glScalef(0.05f, 0.2f, 0.05f); // Skala pegangan
-    glutSolidCube(1.0); // Pegangan pintu pertama
+    glTranslatef(-0.35f, 0.0f, 0.52f); 
+    glScalef(0.05f, 0.2f, 0.05f); 
+    glutSolidCube(1.0); 
     glPopMatrix();
 
     // Pegangan pintu kedua
     glPushMatrix();
-    glTranslatef(0.35f, 0.0f, 0.52f); // Posisi pegangan pintu kedua
-    glScalef(0.05f, 0.2f, 0.05f); // Skala pegangan
-    glutSolidCube(1.0); // Pegangan pintu kedua
+    glTranslatef(0.35f, 0.0f, 0.52f); 
+    glScalef(0.05f, 0.2f, 0.05f); 
+    glutSolidCube(1.0); 
     glPopMatrix();
 
-    // 4. Rak dalam lemari (tetap abu-abu)
-    glColor3f(0.7f, 0.7f, 0.7f); // Warna abu-abu untuk rak
+    // 4. Rak dalam lemari 
+    glColor3f(0.7f, 0.7f, 0.7f); 
     for (float i = -0.7f; i <= 0.7f; i += 0.7f) {
         glPushMatrix();
-        glTranslatef(0.0f, i, 0.0f); // Posisi setiap rak
-        glScalef(0.9f, 0.05f, 0.4f); // Skala rak
-        glutSolidCube(2.0); // Rak
+        glTranslatef(0.0f, i, 0.0f); 
+        glScalef(0.9f, 0.05f, 0.4f); 
+        glutSolidCube(2.0); 
         glPopMatrix();
     }
 
-    glutSwapBuffers(); // Tukar buffer untuk menampilkan gambar
+    glutSwapBuffers(); 
 }
 
 void reshape(int w, int h) {
@@ -97,27 +94,26 @@ void reshape(int w, int h) {
     glLoadIdentity();
 
     // Mengatur perspektif untuk viewport dengan sudut 3D
-    gluPerspective(45.0, (GLfloat)w / (GLfloat)h, 1.0, 10.0); // Field of view, aspect ratio, z-near, z-far
+    gluPerspective(45.0, (GLfloat)w / (GLfloat)h, 1.0, 10.0); 
     glMatrixMode(GL_MODELVIEW);
 }
 
 void keyboard(int key, int x, int y) {
-    // Menangani input dari tombol panah
     switch (key) {
     case GLUT_KEY_UP:
-        angleX -= 5.0f; // Rotasi ke atas
+        angleX -= 5.0f; 
         break;
     case GLUT_KEY_DOWN:
-        angleX += 5.0f; // Rotasi ke bawah
+        angleX += 5.0f; 
         break;
     case GLUT_KEY_LEFT:
-        angleY -= 5.0f; // Rotasi ke kiri
+        angleY -= 5.0f; 
         break;
     case GLUT_KEY_RIGHT:
-        angleY += 5.0f; // Rotasi ke kanan
+        angleY += 5.0f; 
         break;
     }
-    glutPostRedisplay(); // Meminta redisplay setelah rotasi
+    glutPostRedisplay(); 
 }
 
 int main(int argc, char** argv) {
@@ -129,7 +125,7 @@ int main(int argc, char** argv) {
     init();
     glutDisplayFunc(display);
     glutReshapeFunc(reshape);
-    glutSpecialFunc(keyboard); // Fungsi untuk menangani input keyboard khusus (tombol panah)
+    glutSpecialFunc(keyboard); 
     glutMainLoop();
     return 0;
 }
